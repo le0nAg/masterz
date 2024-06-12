@@ -1,4 +1,4 @@
-/* styles.css */
+/* style.css */
 
 body {
     font-family: Arial, sans-serif;
@@ -13,13 +13,14 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #4CAF50; /* Green */
     color: #fff;
     padding: 20px 0;
 }
 
 header h1 {
     margin: 0;
+    font-size: 28px;
 }
 
 nav ul {
@@ -36,11 +37,28 @@ nav ul li {
 nav ul li a {
     color: #fff;
     text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a.current {
+    font-weight: bold;
 }
 
 .main-content {
     padding: 50px 0;
     text-align: center;
+}
+
+.project {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.project h3 {
+    margin-top: 0;
 }
 
 footer {
