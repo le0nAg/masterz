@@ -3,41 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina Iniziale</title>
-    <link rel="stylesheet" href="stile.css">
+    <title>PlanetSaver</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Benvenuti al Nostro Sito</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">Chi Siamo</a></li>
-                <li><a href="#services">Servizi</a></li>
-                <li><a href="#contact">Contatti</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>PlanetSaver</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Acquista Alberi</a></li>
+                    <li><a href="#">Progetti</a></li>
+                    <li><a href="#">Contatti</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <main>
-        <section id="home">
-            <h2>Home</h2>
-            <p>Questa è la sezione Home del nostro sito.</p>
-        </section>
-        <section id="about">
-            <h2>Chi Siamo</h2>
-            <p>Informazioni sulla nostra azienda.</p>
-        </section>
-        <section id="services">
-            <h2>Servizi</h2>
-            <p>Descrizione dei servizi offerti.</p>
-        </section>
-        <section id="contact">
-            <h2>Contatti</h2>
-            <p>Informazioni per contattarci.</p>
-        </section>
-    </main>
+
+    <section class="main-content">
+        <div class="container">
+            <h2>Benvenuti in PlanetSaver!</h2>
+            <p>Qui puoi acquistare alberi e partecipare ad attività per salvare il pianeta.</p>
+        </div>
+    </section>
+
     <footer>
-        <p>&copy; 2024 Nome dell'Azienda. Tutti i diritti riservati.</p>
+        <div class="container">
+            <p>&copy; 2024 PlanetSaver. Tutti i diritti riservati.</p>
+        </div>
     </footer>
 </body>
 </html>
