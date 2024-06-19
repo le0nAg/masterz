@@ -70,6 +70,24 @@ nav ul li a.current {
     clear: both;
 }
 
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.purchase-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+}
+.purchase-button:hover {
+    background-color: #0056b3;
+}
 
 .project h3 {
     margin-top: 0;
