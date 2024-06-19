@@ -1,5 +1,3 @@
-/* style.css */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,7 +7,7 @@ body {
 .container {
     width: 80%;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
 }
 
 header {
@@ -44,13 +42,22 @@ nav ul li a.current {
     font-weight: bold;
 }
 
-.main-content {
-    padding: 50px 0;
+.token-contatori {
+    padding: 0; /* Riduci il padding */
     text-align: center;
-    margin-bottom: 100px; /* Aggiungi un margine inferiore per separare il footer */
+    margin-bottom: 0; /* Riduci il margine inferiore */
 }
 
-/* style.css */
+.main-content {
+    padding: 10px 0; /* Riduci il padding */
+    text-align: center;
+    margin-bottom: 50px; /* Riduci il margine inferiore */
+}
+
+.contribution {
+    font-size: 18px;
+    margin-top: 10px;
+}
 
 .project {
     background-color: #f2f2f2;
@@ -61,6 +68,7 @@ nav ul li a.current {
     width: auto; /* Imposta larghezza al 33.33% della larghezza del contenitore (meno il margine) */
     float: left; /* Rende le cards fluttuanti */
     margin-right: 20px; /* Margine a destra tra le cards */
+    border-radius: 2vw;
 }
 
 /* Pulisce le float dopo l'ultimo elemento */
@@ -76,6 +84,7 @@ nav ul li a.current {
     align-items: center;
     margin-top: 10px;
 }
+
 .purchase-button {
     display: inline-block;
     padding: 10px 20px;
@@ -85,6 +94,7 @@ nav ul li a.current {
     border-radius: 5px;
     text-align: center;
 }
+
 .purchase-button:hover {
     background-color: #0056b3;
 }
@@ -99,13 +109,15 @@ nav ul li a.current {
     object-fit: cover; /* Scala l'immagine per riempire il contenitore mantenendo le proporzioni */
     display: block; /* Garantisce che l'immagine si comporti come un blocco */
     margin-bottom: 10px; /* Aggiungi spazio sotto l'immagine */
+    border-radius: 2vw;
 }
+
 footer {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 20px 0;
-    position: fixed;
+    position: relative; /* Cambiato da fixed a relative */
     width: 100%;
     bottom: 0;
 }
