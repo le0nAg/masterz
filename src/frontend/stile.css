@@ -47,7 +47,10 @@ nav ul li a.current {
 .main-content {
     padding: 50px 0;
     text-align: center;
+    margin-bottom: 100px; /* Aggiungi un margine inferiore per separare il footer */
 }
+
+/* style.css */
 
 .project {
     background-color: #f2f2f2;
@@ -55,12 +58,30 @@ nav ul li a.current {
     padding: 20px;
     margin-top: 20px;
     text-align: left;
+    width: auto; /* Imposta larghezza al 33.33% della larghezza del contenitore (meno il margine) */
+    float: left; /* Rende le cards fluttuanti */
+    margin-right: 20px; /* Margine a destra tra le cards */
 }
+
+/* Pulisce le float dopo l'ultimo elemento */
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 
 .project h3 {
     margin-top: 0;
 }
 
+.project img.project-image {
+    width: 330px; /* Imposta larghezza fissa */
+    height: 200px; /* Imposta altezza fissa */
+    object-fit: cover; /* Scala l'immagine per riempire il contenitore mantenendo le proporzioni */
+    display: block; /* Garantisce che l'immagine si comporti come un blocco */
+    margin-bottom: 10px; /* Aggiungi spazio sotto l'immagine */
+}
 footer {
     background-color: #333;
     color: #fff;
