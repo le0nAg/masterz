@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanetSaver - Contribuisci</title>
+    <link rel="stylesheet" href="stile.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>PlanetSaver - Contribuisci</h1>
+            <div class="navbar-container">
+                <nav>
+                    <ul>
+                        <li><a href="./index.html" class="current">Home</a></li>
+                        <li><a href="#">Buy Trees</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="login-button" onclick="location.href = '/login.html'">LOGIN</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>Acquista Alberi</h2>
+            <form id="purchase-form">
+                <label id="wallet">Wallet: FDNKDFGKNFDGANL</label>
+                <p></p>
+                <label for="quantity">Quantità:</label>
+                <select id="quantity" name="quantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            
+                
+                <label for="cause">Causa:</label>
+                <select id="cause" name="cause">
+                    <option value="reforestation">Riforestazione</option>
+                    <option value="urban-greening">Verde Urbano</option>
+                    <option value="habitat-restoration">Restauro dell'Habitat</option>
+                </select>
+                
+                <div class="preview">
+                    <p>Prezzo d'acquisto: <span id="price-preview">€0</span></p>
+                    <p>CO2 equivalente: <span id="co2-preview">0 kg</span></p>
+                    <p>Tempo necessario per piantare: <span id="time-preview">0 ore</span></p>
+                </div>
+                
+                <button type="submit">Acquista</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PlanetSaver. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('purchase-form').addEventListener('change', updatePreviews);
+
+        function updatePreviews() {
+            const quantity = document.getElementById('quantity').value;
+            const price = quantity * 10; // Prezzo esempio: 10 euro per albero
+            const co2 = quantity * 20; // CO2 esempio: 20 kg per albero
+            const time = quantity * 1; // Tempo esempio: 1 ora per albero
+
+            document.getElementById('price-preview').textContent = `€${price}`;
+            document.getElementById('co2-preview').textContent = `${co2} kg`;
+            document.getElementById('time-preview').textContent = `${time} ore`;
+        }
+    </script>
+</body>
+</html>
+
