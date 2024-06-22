@@ -21,27 +21,6 @@ header h1 {
     font-size: 28px;
 }
 
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-nav ul li a.current {
-    font-weight: bold;
-}
-
 .token-contatori {
     padding: 0; /* Riduci il padding */
     text-align: center;
@@ -120,4 +99,41 @@ footer {
     position: relative; /* Cambiato da fixed a relative */
     width: 100%;
     bottom: 0;
+}
+
+/* Aggiungi queste regole per posizionare il bottone alla destra della navbar */
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-right: 15px;
+
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white; /* Colore del testo bianco */
+}
+
+.login-button {
+    padding: 10px 20px;
+    background-color: white;
+    color: #4CAF50;
+    border: none;
+    cursor: pointer;
+    border-radius: 2vw;
+}
+
+.login-button:hover {
+    background-color: #e2ce32;
 }
