@@ -128,10 +128,12 @@ nav ul li a {
 .login-button {
     padding: 10px 20px;
     background-color: white;
-    color: #4CAF50;
+    color: #296f2b;
     border: none;
     cursor: pointer;
     border-radius: 2vw;
+    font-weight: bold;
+
 }
 
 .login-button:hover {
