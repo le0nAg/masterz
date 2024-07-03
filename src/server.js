@@ -21,20 +21,20 @@ const config = {
 };
 // Auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use((0, express_openid_connect_1.auth)(config));
-// Serve static files from the 'frontend' directory
-app.use(express_1.default.static(path_1.default.join(__dirname, '/frontend')));
 // Endpoint to check authentication status
 app.get('/auth-status', (req, res) => {
     console.log('Auth status endpoint hit');
     res.json({ authenticated: req.oidc.isAuthenticated() });
 });
+// Serve static files from the 'frontend' directory
+app.use(express_1.default.static(path_1.default.join(__dirname, 'frontend')));
 // Serve the backend files if necessary
 app.get('/api', (req, res) => {
     res.send('Hello from the backend!');
 });
 // Serve static index.html for all other routes
 app.get('*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, '/frontend', 'index.html'));
+    res.sendFile(path_1.default.join(__dirname, 'frontend', 'index.html'));
 });
 app.listen(PORT, () => {
     console.log(`Server is running on http://127.0.0.1:${PORT}`);

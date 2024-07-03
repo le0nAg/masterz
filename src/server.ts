@@ -21,15 +21,14 @@ const config = {
 // Auth router attaches /login, /logout, and /callback routes to the baseURL
 app.use(auth(config));
 
-// Serve static files from the 'frontend' directory
-app.use(express.static(path.join(__dirname, '/frontend')));
-
 // Endpoint to check authentication status
 app.get('/auth-status', (req: Request, res: Response) => {
     console.log('Auth status endpoint hit');
     res.json({ authenticated: req.oidc.isAuthenticated() });
 });
 
+// Serve static files from the 'frontend' directory
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 // Serve the backend files if necessary
 app.get('/api', (req: Request, res: Response) => {
@@ -38,7 +37,7 @@ app.get('/api', (req: Request, res: Response) => {
 
 // Serve static index.html for all other routes
 app.get('*', (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, '/frontend', 'index.html'));
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
 });
 
 app.listen(PORT, () => {

@@ -19,7 +19,7 @@
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
-                <button class="login-button" onclick="location.href = '/login'">LOGIN</button>
+                <button id="auth-button" class="login-button" onclick="handleAuthClick()">LOGIN</button>
                 <span id="login-message" class="message">You are not logged in</span>
             </div>
         </div>        
@@ -94,16 +94,21 @@
         // Mostra o nasconde il messaggio basato sullo stato di login
         async function showLoginMessage() {
             const messageElement = document.getElementById('login-message');
+            const authButton = document.getElementById('auth-button');
             const isLoggedIn = await checkAuthStatus();
             
             if (isLoggedIn) {
                 messageElement.textContent = 'Login effettuato con successo';
                 messageElement.className = 'message success';
                 messageElement.style.display = 'inline';
+                authButton.textContent = 'LOGOUT';
+                authButton.onclick = () => location.href = '/logout';
             } else {
                 messageElement.textContent = 'You are not logged in';
                 messageElement.className = 'message error';
                 messageElement.style.display = 'inline';
+                authButton.textContent = 'LOGIN';
+                authButton.onclick = () => location.href = '/login';
             }
         }
 
