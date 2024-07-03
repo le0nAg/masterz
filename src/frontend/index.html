@@ -20,9 +20,9 @@
                     </ul>
                 </nav>
                 <button class="login-button" onclick="location.href = '/login'">LOGIN</button>
+                <span id="login-message" class="message">You are not logged in</span>
             </div>
         </div>        
-
     </header>
     
     <section class="token-contatori">
@@ -39,9 +39,9 @@
             <p>Here you can buy trees and participate in activities to save the planet.</p>
             
             <div class="project">
-                <img src="./img/1.webp" alt="Project Image"  class="project-image">
+                <img src="./img/1.webp" alt="Project Image" class="project-image">
                 <h3>Fighting Illegal Deforestation</h3>
-                <p><strong>Region:</strong>South America</p>
+                <p><strong>Region:</strong> South America</p>
                 <p><strong>Tree Type:</strong> Pine</p>
                 <div class="button-container">
                     <a href="./contribusci.html" class="purchase-button">Contribuisci Ora</a>
@@ -49,24 +49,23 @@
             </div>
             
             <div class="project">
-                <img src="./img/2.webp" alt="Project Image"  class="project-image">
+                <img src="./img/2.webp" alt="Project Image" class="project-image">
                 <h3>Restore olive groves affected by Xylella</h3>
-                <p><strong>Region:</strong>Europe, Italy</p>
+                <p><strong>Region:</strong> Europe, Italy</p>
                 <p><strong>Tree Type:</strong> Ulivi</p>
                 <div class="button-container">
                     <a href="./contribusci.html" class="purchase-button">Contribuisci Ora</a>
                 </div>
             </div>
             <div class="project">
-                <img src="./img/3.webp" alt="Project Image"  class="project-image">
+                <img src="./img/3.webp" alt="Project Image" class="project-image">
                 <h3>Restoring CO2</h3>
-                <p><strong>Region:</strong>Europre, Italy</p>
-                <p><strong>Tree Type:</strong>Querce</p>
+                <p><strong>Region:</strong> Europe, Italy</p>
+                <p><strong>Tree Type:</strong> Querce</p>
                 <div class="button-container">
                     <a href="./contribusci.html" class="purchase-button">Contribuisci Ora</a>
                 </div>
             </div>
-            
         </div>
     </section>
 
@@ -75,5 +74,41 @@
             <p>&copy; 2024 PlanetSaver. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Funzione per controllare lo stato di autenticazione dal server
+        async function checkAuthStatus() {
+            try {
+                const response = await fetch('/auth-status');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data.authenticated;
+            } catch (error) {
+                console.error('Errore nel controllare lo stato di autenticazione:', error);
+                return false;
+            }
+        }
+
+        // Mostra o nasconde il messaggio basato sullo stato di login
+        async function showLoginMessage() {
+            const messageElement = document.getElementById('login-message');
+            const isLoggedIn = await checkAuthStatus();
+            
+            if (isLoggedIn) {
+                messageElement.textContent = 'Login effettuato con successo';
+                messageElement.className = 'message success';
+                messageElement.style.display = 'inline';
+            } else {
+                messageElement.textContent = 'You are not logged in';
+                messageElement.className = 'message error';
+                messageElement.style.display = 'inline';
+            }
+        }
+
+        // Chiama la funzione quando la pagina è caricata
+        window.onload = showLoginMessage;
+    </script>
 </body>
 </html>
