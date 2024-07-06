@@ -19,7 +19,8 @@
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
-                <button class="login-button" onclick="location.href = '/login.html'">LOGIN</button>
+                <button id="auth-button" class="login-button" onclick="handleAuthClick()">LOGIN</button>
+                <span id="login-message" class="message">You are not logged in</span>
             </div>
         </div>
     </header>
@@ -75,7 +76,47 @@
             document.getElementById('co2-preview').textContent = `${co2} kg`;
             document.getElementById('time-preview').textContent = `${time} ore`;
         }
+    </script> <script>
+        // Funzione per controllare lo stato di autenticazione dal server
+        async function checkAuthStatus() {
+            try {
+                const response = await fetch('/auth-status');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data.authenticated;
+            } catch (error) {
+                console.error('Errore nel controllare lo stato di autenticazione:', error);
+                return false;
+            }
+        }
+
+        // Mostra o nasconde il messaggio basato sullo stato di login
+        async function showLoginMessage() {
+            const messageElement = document.getElementById('login-message');
+            const authButton = document.getElementById('auth-button');
+            const isLoggedIn = await checkAuthStatus();
+            
+            if (isLoggedIn) {
+                messageElement.textContent = 'Login effettuato con successo';
+                messageElement.className = 'message success';
+                messageElement.style.display = 'inline';
+                authButton.textContent = 'LOGOUT';
+                authButton.onclick = () => location.href = '/logout';
+            } else {
+                messageElement.textContent = 'Non sei loggato';
+                messageElement.className = 'message error';
+                messageElement.style.display = 'inline';
+                authButton.textContent = 'LOGIN';
+                authButton.onclick = () => location.href = '/login';
+            }
+        }
+
+        // Chiama la funzione quando la pagina è caricata
+        window.onload = showLoginMessage;
     </script>
+
 </body>
 </html>
 
