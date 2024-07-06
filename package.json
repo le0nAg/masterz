@@ -11,7 +11,9 @@
     "build": "tsc",
     "start": "ts-node src/server.ts",
     "imageUploader": "ts-node src/backend/imageUploader.ts",
-    "airdrop": "ts-node solana/airdrop.ts"
+    "airdrop": "ts-node solana/airdrop.ts",
+    "nftMetadata": "ts-node src/backend/nftMetadata.ts",
+    "nftMint": "ts-node src/backend/nftMint.ts"
   },
   "keywords": [],
   "author": "",
