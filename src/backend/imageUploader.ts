@@ -3,7 +3,7 @@ import { createGenericFile, createSignerFromKeypair, signerIdentity } from "@met
 import { readFile } from "fs/promises";
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 
-//import wallet from "../wallet.json";
+import wallet from "../../solana/key.json";
 
 const umi = createUmi("https://api.devnet.solana.com", "finalized")
 umi.use(irysUploader());
@@ -13,8 +13,8 @@ const myKeypairSigner = createSignerFromKeypair(umi, keypair);
 umi.use(signerIdentity(myKeypairSigner));
 
 (async () => {
-    const image = await readFile('setPath');
-    const nft_image = createGenericFile(image, "imageName")
+    const image = await readFile('src/frontend/img/ulivo1.webp');
+    const nft_image = createGenericFile(image, "UlivoV1", {extension: ".jpg", contentType: "image/jpeg"})
 
     const [myUri] = await umi.uploader.upload([nft_image]);
 

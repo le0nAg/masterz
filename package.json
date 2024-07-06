@@ -9,7 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "ts-node src/server.ts"
+    "start": "ts-node src/server.ts",
+    "imageUploader": "ts-node src/backend/imageUploader.ts",
+    "airdrop": "ts-node solana/airdrop.ts"
   },
   "keywords": [],
   "author": "",
