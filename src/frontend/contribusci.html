@@ -19,8 +19,8 @@
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
-                <button id="auth-button" class="login-button" onclick="handleAuthClick()">LOGIN</button>
-                <span id="login-message" class="message">You are not logged in</span>
+                <button id="auth-button" class="login-button">LOGIN</button>
+                <span id="login-message" class="message">Non sei loggato</span>
             </div>
         </div>
     </header>
@@ -38,7 +38,6 @@
                     <option value="3">3</option>
                 </select>
             
-                
                 <label for="cause">Causa:</label>
                 <select id="cause" name="cause">
                     <option value="Fighting Illegal Deforestation">Fighting Illegal Deforestation</option>
@@ -52,7 +51,7 @@
                     <p>Tempo necessario per piantare: <span id="time-preview">0 ore</span></p>
                 </div>
                 
-                <button type="submit">Acquista</button>
+                <button type="submit" id="acquistaBtn">Acquista</button>
             </form>
         </div>
     </main>
@@ -63,20 +62,21 @@
         </div>
     </footer>
 
+    <!-- Pop-up Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="loading">Caricamento...</div>
+            <div id="confirmation" style="display:none;">
+                <img src="./img/ulivo1.webp" witdh="450px" height="450px" alt="Acquisto completato">
+                <p>Acquisto completato!</p>
+                <p id="confirmation-details"></p>
+                <p>Grazie per il tuo acquisto.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        document.getElementById('purchase-form').addEventListener('change', updatePreviews);
-
-        function updatePreviews() {
-            const quantity = document.getElementById('quantity').value;
-            const price = quantity * 10; // Prezzo esempio: 10 euro per albero
-            const co2 = quantity * 20; // CO2 esempio: 20 kg per albero
-            const time = quantity * 1; // Tempo esempio: 1 ora per albero
-
-            document.getElementById('price-preview').textContent = `€${price}`;
-            document.getElementById('co2-preview').textContent = `${co2} kg`;
-            document.getElementById('time-preview').textContent = `${time} ore`;
-        }
-    </script> <script>
         // Funzione per controllare lo stato di autenticazione dal server
         async function checkAuthStatus() {
             try {
@@ -115,8 +115,78 @@
 
         // Chiama la funzione quando la pagina è caricata
         window.onload = showLoginMessage;
-    </script>
 
+        document.getElementById('purchase-form').addEventListener('change', updatePreviews);
+
+        function updatePreviews() {
+            const quantity = document.getElementById('quantity').value;
+            const price = quantity * 10; // Prezzo esempio: 10 euro per albero
+            const co2 = quantity * 20; // CO2 esempio: 20 kg per albero
+            const time = quantity * 1; // Tempo esempio: 1 ora per albero
+
+            document.getElementById('price-preview').textContent = `€${price}`;
+            document.getElementById('co2-preview').textContent = `${co2} kg`;
+            document.getElementById('time-preview').textContent = `${time} ore`;
+        }
+
+        // Funzione per mostrare il popup al click del bottone "Acquista"
+        document.getElementById('purchase-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            showModal();
+        });
+
+        function showModal() {
+            var modal = document.getElementById("myModal");
+            var loading = document.getElementById("loading");
+            var confirmation = document.getElementById("confirmation");
+            var confirmationDetails = document.getElementById("confirmation-details");
+
+            // Recupera i valori dal form
+            const quantity = document.getElementById('quantity').value;
+            const cause = document.getElementById('cause').value;
+            const price = document.getElementById('price-preview').textContent;
+            const co2 = document.getElementById('co2-preview').textContent;
+            const time = document.getElementById('time-preview').textContent;
+
+            // Imposta i dettagli di conferma nel popup
+            confirmationDetails.innerHTML = `
+                <p><strong>Quantità:</strong> ${quantity}</p>
+                <p><strong>Causa:</strong> ${cause}</p>
+                <p><strong>Prezzo:</strong> ${price}</p>
+                <p><strong>CO2 equivalente:</strong> ${co2}</p>
+                <p><strong>Tempo necessario per piantare:</strong> ${time}</p>
+            `;
+
+            modal.style.display = "block";
+
+            // Simula il caricamento
+            setTimeout(function() {
+                loading.style.display = "none";
+                confirmation.style.display = "block";
+            }, 2000); // Cambia 2000 al tempo di caricamento desiderato in millisecondi
+        }
+
+        // Chiudi il modal quando l'utente clicca sulla X
+        document.getElementsByClassName("close")[0].onclick = function() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+            var loading = document.getElementById("loading");
+            var confirmation = document.getElementById("confirmation");
+            loading.style.display = "block";
+            confirmation.style.display = "none";
+        };
+
+        // Chiudi il modal se l'utente clicca fuori dal contenuto del modal
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+                var loading = document.getElementById("loading");
+                var confirmation = document.getElementById("confirmation");
+                loading.style.display = "block";
+                confirmation.style.display = "none";
+            }
+        };
+    </script>
 </body>
 </html>
-
