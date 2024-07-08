@@ -27,32 +27,34 @@
 
     <main>
         <div class="container">
-            <h2>Acquista Alberi</h2>
-            <form id="purchase-form">
-                <label id="wallet">Wallet: FDNKDFGKNFDGANL</label>
-                <p></p>
-                <label for="quantity">Quantità:</label>
-                <select id="quantity" name="quantity">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            
-                <label for="cause">Causa:</label>
-                <select id="cause" name="cause">
-                    <option value="Fighting Illegal Deforestation">Fighting Illegal Deforestation</option>
-                    <option value="Restore olive groves affected by Xylella">Restore olive groves affected by Xylella</option>
-                    <option value="Restoring CO2">Restoring CO2</option>
-                </select>
+            <div class="purchase-form">
+                <h2 style="color: white; text-align: center;">Acquista Alberi</h2>
+                <form id="purchase-form">
+                    <label id="wallet" style="color: white;">Wallet: FDNKDFGKNFDGANL</label>
+                    <p></p>
+                    <label for="quantity" style="color: white;">Quantità:</label>
+                    <select id="quantity" name="quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
                 
-                <div class="preview">
-                    <p>Prezzo d'acquisto: <span id="price-preview">€0</span></p>
-                    <p>CO2 equivalente: <span id="co2-preview">0 kg</span></p>
-                    <p>Tempo necessario per piantare: <span id="time-preview">0 ore</span></p>
-                </div>
-                
-                <button type="submit" id="acquistaBtn">Acquista</button>
-            </form>
+                    <label for="cause" style="color: white;">Causa:</label>
+                    <select id="cause" name="cause">
+                        <option value="Fighting Illegal Deforestation">Fighting Illegal Deforestation</option>
+                        <option value="Restore olive groves affected by Xylella">Restore olive groves affected by Xylella</option>
+                        <option value="Restoring CO2">Restoring CO2</option>
+                    </select>
+                    
+                    <div class="preview">
+                        <p style="color: white;">Prezzo d'acquisto: <span id="price-preview" style="color: white;">€0</span></p>
+                        <p style="color: white;">CO2 equivalente: <span id="co2-preview" style="color: white;">0 kg</span></p>
+                        <p style="color: white;">Tempo necessario per piantare: <span id="time-preview" style="color: white;">0 ore</span></p>
+                    </div>
+                    
+                    <button type="submit" id="acquistaBtn">Acquista</button>
+                </form>
+            </div>
         </div>
     </main>
 
@@ -115,6 +117,7 @@
 
         // Chiama la funzione quando la pagina è caricata
         window.onload = showLoginMessage;
+        window.onload = updatePreviews;
 
         document.getElementById('purchase-form').addEventListener('change', updatePreviews);
 
