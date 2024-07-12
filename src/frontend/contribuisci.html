@@ -28,18 +28,18 @@
     <main>
         <div class="container">
             <div class="purchase-form">
-                <h2 style="color: white; text-align: center;">Acquista Alberi</h2>
+                <h2 style="color: white; text-align: center;">Buy Trees</h2>
                 <form id="purchase-form">
                     <label id="wallet" style="color: white;">Wallet: FDNKDFGKNFDGANL</label>
                     <p></p>
-                    <label for="quantity" style="color: white;">Quantità:</label>
+                    <label for="quantity" style="color: white;">Quantity:</label>
                     <select id="quantity" name="quantity">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
                 
-                    <label for="cause" style="color: white;">Causa:</label>
+                    <label for="cause" style="color: white;">Cause:</label>
                     <select id="cause" name="cause">
                         <option value="Fighting Illegal Deforestation">Fighting Illegal Deforestation</option>
                         <option value="Restore olive groves affected by Xylella">Restore olive groves affected by Xylella</option>
@@ -47,12 +47,12 @@
                     </select>
                     
                     <div class="preview">
-                        <p style="color: white;">Prezzo d'acquisto: <span id="price-preview" style="color: white;">€0</span></p>
-                        <p style="color: white;">CO2 equivalente: <span id="co2-preview" style="color: white;">0 kg</span></p>
-                        <p style="color: white;">Tempo necessario per piantare: <span id="time-preview" style="color: white;">0 ore</span></p>
+                        <p style="color: white;">Price: <span id="price-preview" style="color: white;">€0</span></p>
+                        <p style="color: white;">Equivalent CO2: <span id="co2-preview" style="color: white;">0 kg</span></p>
+                        <p style="color: white;">Time needed to plant: <span id="time-preview" style="color: white;">0 ore</span></p>
                     </div>
                     
-                    <button type="submit" id="acquistaBtn">Acquista</button>
+                    <button type="submit" id="acquistaBtn">Buy</button>
                 </form>
             </div>
         </div>
@@ -68,12 +68,12 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <div id="loading">Caricamento...</div>
+            <div id="loading">Loading...</div>
             <div id="confirmation" style="display:none;">
                 <img src="./img/ulivo1.webp" witdh="450px" height="450px" alt="Acquisto completato">
-                <p>Acquisto completato!</p>
+                <p>Purchase Completed!</p>
                 <p id="confirmation-details"></p>
-                <p>Grazie per il tuo acquisto.</p>
+                <p>Thank you for your purchase.</p>
             </div>
         </div>
     </div>
@@ -153,11 +153,11 @@
 
             // Imposta i dettagli di conferma nel popup
             confirmationDetails.innerHTML = `
-                <p><strong>Quantità:</strong> ${quantity}</p>
-                <p><strong>Causa:</strong> ${cause}</p>
-                <p><strong>Prezzo:</strong> ${price}</p>
-                <p><strong>CO2 equivalente:</strong> ${co2}</p>
-                <p><strong>Tempo necessario per piantare:</strong> ${time}</p>
+                <p><strong>Quantity:</strong> ${quantity}</p>
+                <p><strong>Cause:</strong> ${cause}</p>
+                <p><strong>Price:</strong> ${price}</p>
+                <p><strong>Equivalent CO2:</strong> ${co2}</p>
+                <p><strong>Time needed to plant:</strong> ${time}</p>
             `;
 
             modal.style.display = "block";

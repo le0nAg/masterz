@@ -35,14 +35,14 @@
     </section>-->
     <section class="main-content">
         <div class="container">
-            <h2 style="color: white;">Welcome to PlanetSaver!</h2>
+            <h2 style="color: white;">Welcome to TheGreenSOLution!</h2>
             <p style="color: white;">Here you can buy trees and participate in activities to save the planet.</p>
             
             <div class="project">
                 <img src="./img/1.webp" alt="Project Image" class="project-image">
                 <h3>Fighting Illegal Deforestation</h3>
                 <p><strong>Region:</strong> South America</p>
-                <p><strong>Tree Type:</strong> Pine</p>
+                <p><strong>Tree Type:</strong> Pines</p>
                 <div class="button-container">
                     <a href="./contribuisci.html" class="purchase-button">Contribuisci Ora</a>
                 </div>
@@ -52,7 +52,7 @@
                 <img src="./img/2.webp" alt="Project Image" class="project-image">
                 <h3>Restore olive groves affected by Xylella</h3>
                 <p><strong>Region:</strong> Europe, Italy</p>
-                <p><strong>Tree Type:</strong> Ulivi</p>
+                <p><strong>Tree Type:</strong> Olive Trees</p>
                 <div class="button-container">
                     <a href="./contribuisci.html" class="purchase-button">Contribuisci Ora</a>
                 </div>
@@ -61,7 +61,7 @@
                 <img src="./img/3.webp" alt="Project Image" class="project-image">
                 <h3>Restoring CO2</h3>
                 <p><strong>Region:</strong> Europe, Italy</p>
-                <p><strong>Tree Type:</strong> Querce</p>
+                <p><strong>Tree Type:</strong> Oaks</p>
                 <div class="button-container">
                     <a href="./contribuisci.html" class="purchase-button">Contribuisci Ora</a>
                 </div>
@@ -98,13 +98,13 @@
             const isLoggedIn = await checkAuthStatus();
             
             if (isLoggedIn) {
-                messageElement.textContent = 'Login effettuato con successo';
+                messageElement.textContent = 'Successfully logged in';
                 messageElement.className = 'message success';
                 messageElement.style.display = 'inline';
                 authButton.textContent = 'LOGOUT';
                 authButton.onclick = () => location.href = '/logout';
             } else {
-                messageElement.textContent = 'Non sei loggato';
+                messageElement.textContent = 'You are not logged in';
                 messageElement.className = 'message error';
                 messageElement.style.display = 'inline';
                 authButton.textContent = 'LOGIN';
