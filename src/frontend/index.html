@@ -19,14 +19,13 @@
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
-                <button id="auth-button" class="login-button" onclick="handleAuthClick()">LOGIN</button>
+                <button id="auth-button-web2" class="login-button" onclick="handleWeb2AuthClick()">LOGIN WEB2</button>
+                <button id="auth-button-web3" class="login-button" onclick="handleWeb3AuthClick()">LOGIN WEB3</button>
                 <span id="login-message" class="message">You are not logged in</span>
             </div>
         </div>        
     </header>
     
-    <!-- (Il resto del tuo HTML rimane invariato) -->
-
     <section class="main-content">
         <div class="container">
             <h2 style="color: white;">Welcome to TheGreenSOLution!</h2>
@@ -72,45 +71,59 @@
     <script type="module">
         import { connectWallet, checkAuthStatus } from './wallet-auth.js';
 
-        async function handleAuthClick() {
+        async function handleWeb2AuthClick() {
+            location.href = '/login';
+        }
+
+        async function handleWeb3AuthClick() {
             try {
                 const walletAddress = await connectWallet();
-                await showLoginMessage(walletAddress);
+                await showLoginMessage(walletAddress, 'web3');
             } catch (error) {
                 console.error('Error connecting wallet:', error);
             }
         }
 
-        async function showLoginMessage(walletAddress) {
+        async function showLoginMessage(walletAddress, authType = 'web2') {
             const messageElement = document.getElementById('login-message');
-            const authButton = document.getElementById('auth-button');
+            const authButtonWeb2 = document.getElementById('auth-button-web2');
+            const authButtonWeb3 = document.getElementById('auth-button-web3');
 
             if (walletAddress) {
                 messageElement.textContent = `Logged in with wallet: ${walletAddress}`;
                 messageElement.className = 'message success';
                 messageElement.style.display = 'inline';
-                authButton.textContent = 'LOGOUT';
-                authButton.onclick = () => handleLogout();
+
+                if (authType === 'web3') {
+                    authButtonWeb3.textContent = 'LOGOUT WEB3';
+                    authButtonWeb3.onclick = () => handleWeb3Logout();
+                } else {
+                    authButtonWeb2.textContent = 'LOGOUT WEB2';
+                    authButtonWeb2.onclick = () => location.href = '/logout';
+                }
             } else {
                 messageElement.textContent = 'You are not logged in';
                 messageElement.className = 'message error';
                 messageElement.style.display = 'inline';
-                authButton.textContent = 'LOGIN';
-                authButton.onclick = () => handleAuthClick();
+
+                authButtonWeb2.textContent = 'LOGIN WEB2';
+                authButtonWeb2.onclick = () => handleWeb2AuthClick();
+
+                authButtonWeb3.textContent = 'LOGIN WEB3';
+                authButtonWeb3.onclick = () => handleWeb3AuthClick();
             }
         }
 
-        function handleLogout() {
+        function handleWeb3Logout() {
             window.solana.disconnect();
-            showLoginMessage(null);
+            showLoginMessage(null, 'web3');
         }
 
         // Chiama la funzione quando la pagina è caricata
         window.onload = async () => {
             const walletAddress = await checkAuthStatus();
-            await showLoginMessage(walletAddress);
+            await showLoginMessage(walletAddress, 'web3');
         };
     </script>
 </body>
 </html>
-
