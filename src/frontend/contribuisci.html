@@ -19,7 +19,8 @@
                         <li><a href="#">Contact</a></li>
                     </ul>
                 </nav>
-                <button id="auth-button" class="login-button">LOGIN</button>
+                <button id="auth-button-web2" class="login-button">LOGIN WEB2</button>
+                <button id="auth-button-web3" class="login-button">LOGIN WEB3</button>
                 <span id="login-message" class="message">Non sei loggato</span>
             </div>
         </div>
@@ -78,9 +79,11 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { connectWallet, checkAuthStatus } from './wallet-auth.js';
+
         // Funzione per controllare lo stato di autenticazione dal server
-        async function checkAuthStatus() {
+        async function checkWeb2AuthStatus() {
             try {
                 const response = await fetch('/auth-status');
                 if (!response.ok) {
@@ -95,29 +98,66 @@
         }
 
         // Mostra o nasconde il messaggio basato sullo stato di login
-        async function showLoginMessage() {
+        async function showLoginMessage(authType, walletAddress = null) {
             const messageElement = document.getElementById('login-message');
-            const authButton = document.getElementById('auth-button');
-            const isLoggedIn = await checkAuthStatus();
-            
-            if (isLoggedIn) {
+            const authButtonWeb2 = document.getElementById('auth-button-web2');
+            const authButtonWeb3 = document.getElementById('auth-button-web3');
+
+            if (authType === 'web3' && walletAddress) {
+                messageElement.textContent = `Logged in with wallet: ${walletAddress}`;
+                messageElement.className = 'message success';
+                messageElement.style.display = 'inline';
+                authButtonWeb3.textContent = 'LOGOUT WEB3';
+                authButtonWeb3.onclick = () => handleWeb3Logout();
+            } else if (authType === 'web2' && walletAddress) {
                 messageElement.textContent = 'Login effettuato con successo';
                 messageElement.className = 'message success';
                 messageElement.style.display = 'inline';
-                authButton.textContent = 'LOGOUT';
-                authButton.onclick = () => location.href = '/logout';
+                authButtonWeb2.textContent = 'LOGOUT WEB2';
+                authButtonWeb2.onclick = () => location.href = '/logout';
             } else {
                 messageElement.textContent = 'Non sei loggato';
                 messageElement.className = 'message error';
                 messageElement.style.display = 'inline';
-                authButton.textContent = 'LOGIN';
-                authButton.onclick = () => location.href = '/login';
+                authButtonWeb2.textContent = 'LOGIN WEB2';
+                authButtonWeb2.onclick = () => location.href = '/login';
+                authButtonWeb3.textContent = 'LOGIN WEB3';
+                authButtonWeb3.onclick = () => handleWeb3AuthClick();
             }
         }
 
+        // Gestione del login Web2
+        async function handleWeb2AuthClick() {
+            location.href = '/login';
+        }
+
+        // Gestione del login Web3
+        async function handleWeb3AuthClick() {
+            try {
+                const walletAddress = await connectWallet();
+                await showLoginMessage('web3', walletAddress);
+            } catch (error) {
+                console.error('Error connecting wallet:', error);
+            }
+        }
+
+        function handleWeb3Logout() {
+            window.solana.disconnect();
+            showLoginMessage('web3');
+        }
+
         // Chiama la funzione quando la pagina è caricata
-        window.onload = showLoginMessage;
-        window.onload = updatePreviews;
+        window.onload = async () => {
+            const isLoggedInWeb2 = await checkWeb2AuthStatus();
+            if (isLoggedInWeb2) {
+                showLoginMessage('web2', true);
+            }
+            const walletAddress = await checkAuthStatus();
+            if (walletAddress) {
+                showLoginMessage('web3', walletAddress);
+            }
+            updatePreviews();
+        };
 
         document.getElementById('purchase-form').addEventListener('change', updatePreviews);
 
@@ -151,8 +191,6 @@
             const co2 = document.getElementById('co2-preview').textContent;
             const time = document.getElementById('time-preview').textContent;
 
-            
-
             // Imposta i dettagli di conferma nel popup
             confirmationDetails.innerHTML = `
                 <p><strong>Quantity:</strong> ${quantity}</p>
@@ -160,7 +198,7 @@
                 <p><strong>Price:</strong> ${price}</p>
                 <p><strong>Equivalent CO2:</strong> ${co2}</p>
                 <p><strong>Time needed to plant:</strong> ${time}</p>
-                <center><div class="button-container"><a href="https://explorer.solana.com/address/77YetFNhk4ozF8FP8x2Ffxpq2aREUEpwAweDnMZopgMy?cluster=devnet" target="_blank" class="purchase-button">VERIFICA SU EXPLORER SOLANA</button></a></div>
+                <center><div class="button-container"><a href="https://explorer.solana.com/address/77YetFNhk4ozF8FP8x2Ffxpq2aREUEpwAweDnMZopgMy?cluster=devnet" target="_blank" class="purchase-button">VERIFICA SU EXPLORER SOLANA</a></div></center>
             `;
 
             modal.style.display = "block";
