@@ -13,6 +13,7 @@ umi.use(signerIdentity(myKeypairSigner)).use(irysUploader());
 (async () => {
 
     //WIP
+    
     const metadata = {
         name: "SolGreen NFT",
         symbol: "SGT",

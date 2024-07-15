@@ -25,14 +25,8 @@
         </div>        
     </header>
     
-    <!--<section class="token-contatori">
-        <h2>Our contribution to the planet</h2>
-        <div class="contribution">
-            <p><strong>CO2 Restored:</strong> <span id="co2-value">0</span> kg</p>
-            <p><strong>Trees planted:</strong> <span id="trees-value">0</span></p>
-            <p><strong>Improvement of Society:</strong> <span id="society-value">0</span> %</p>
-        </div>
-    </section>-->
+    <!-- (Il resto del tuo HTML rimane invariato) -->
+
     <section class="main-content">
         <div class="container">
             <h2 style="color: white;">Welcome to TheGreenSOLution!</h2>
@@ -75,45 +69,48 @@
         </div>
     </footer>
 
-    <script>
-        // Funzione per controllare lo stato di autenticazione dal server
-        async function checkAuthStatus() {
+    <script type="module">
+        import { connectWallet, checkAuthStatus } from './wallet-auth.js';
+
+        async function handleAuthClick() {
             try {
-                const response = await fetch('/auth-status');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                return data.authenticated;
+                const walletAddress = await connectWallet();
+                await showLoginMessage(walletAddress);
             } catch (error) {
-                console.error('Errore nel controllare lo stato di autenticazione:', error);
-                return false;
+                console.error('Error connecting wallet:', error);
             }
         }
 
-        // Mostra o nasconde il messaggio basato sullo stato di login
-        async function showLoginMessage() {
+        async function showLoginMessage(walletAddress) {
             const messageElement = document.getElementById('login-message');
             const authButton = document.getElementById('auth-button');
-            const isLoggedIn = await checkAuthStatus();
-            
-            if (isLoggedIn) {
-                messageElement.textContent = 'Successfully logged in';
+
+            if (walletAddress) {
+                messageElement.textContent = `Logged in with wallet: ${walletAddress}`;
                 messageElement.className = 'message success';
                 messageElement.style.display = 'inline';
                 authButton.textContent = 'LOGOUT';
-                authButton.onclick = () => location.href = '/logout';
+                authButton.onclick = () => handleLogout();
             } else {
                 messageElement.textContent = 'You are not logged in';
                 messageElement.className = 'message error';
                 messageElement.style.display = 'inline';
                 authButton.textContent = 'LOGIN';
-                authButton.onclick = () => location.href = '/login';
+                authButton.onclick = () => handleAuthClick();
             }
         }
 
+        function handleLogout() {
+            window.solana.disconnect();
+            showLoginMessage(null);
+        }
+
         // Chiama la funzione quando la pagina è caricata
-        window.onload = showLoginMessage;
+        window.onload = async () => {
+            const walletAddress = await checkAuthStatus();
+            await showLoginMessage(walletAddress);
+        };
     </script>
 </body>
 </html>
+
